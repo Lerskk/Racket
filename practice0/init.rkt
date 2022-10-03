@@ -19,3 +19,27 @@
 (substring "How is DrRacket doing?" 4 6)
 #;; (substring "?" 4 6) ERROR: valid range [0, 1]
 
+
+#| Bools
+  True is represented by #true or #t
+  False is represented by #false or #f
+
+  There are some operators
+    - and p q
+    - or p q
+    - not p
+
+  Some operators are only available when we are dealing with numbers
+    [>, <, =, <=, >=]
+|#
+
+(not #t)
+(and #t #f)
+(and #t #t)
+(or #true #f)
+(and (not #false))
+
+(= 3 3)
+(and (= 3 3) #t)
+(and (= 3 3) #false)
+(and (= 3 3) (< 3 777))
