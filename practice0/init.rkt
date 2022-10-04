@@ -1,4 +1,5 @@
 #lang racket/base
+(require 2htdp/image)
 
 #; Numbers
 
@@ -43,3 +44,14 @@
 (and (= 3 3) #t)
 (and (= 3 3) #false)
 (and (= 3 3) (< 3 777))
+
+#; Images
+(circle 20 "solid" "green")
+
+(overlay (rectangle 20 20 "solid" "blue") (circle 7 "solid" "green")) #;; creates a shape as product of multiple shapes, the stacking order is left is in front of right
+
+(empty-scene 100 100) #;; create an empty scene limeted by the size that you put in. It will be represented by balck lines
+
+(place-image (circle 10 "solid" "blue") 40 80 (empty-scene 100 100) #;; put an image on a set of coordinates
+
+(+ (image-width (circle 10 "solid" "red")) (image-height (rectangle 10 20"solid" "blue"))) #;; mesure the width of an image
