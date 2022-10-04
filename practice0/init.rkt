@@ -84,3 +84,44 @@ P
 (color-the-square 20 "green")
 (overlay (color-the-square 20 "blue") (color-the-square 25 "green") (color-the-square 30 "blue"))
 
+(define (pythagoras a b) (sqrt (+ (expt a 2) (expt b 2))))
+
+(define (distance-to-origin x y) (pythagoras x y))
+(distance-to-origin 3 4)
+
+(define (distance-between-points a b x y) (distance-to-origin (- a x) (- b y)))
+(distance-between-points 0 4 0 -3)
+
+(define (cube-volume size) (expt size 3))
+(cube-volume 5)
+
+(define (cube-area size) (* (expt size 2) 6))
+(cube-area 5)
+
+(define (meter->feet meters) (* meters 3.281))
+(meter->feet 2.5)
+
+(define (celsius->fahrenheit temperature) (+ (* temperature (/ 9 5)) 32))
+(celsius->fahrenheit 0)
+(celsius->fahrenheit 50)
+
+(define (is-possible a b c) (> (+ a b) c))
+
+(define (pythagorean-triple a b c) (= c (pythagoras a b)))
+(is-possible 3 4 5)
+(is-possible 1 2 3)
+
+(pythagorean-triple 3 4 5)
+(pythagorean-triple 1 2 3)
+
+(define (sum-length string-1 string-2) (+ (string-length string-1) (string-length string-2)))
+(sum-length "Hi" "DrRacket")
+(sum-length "I" "")
+
+(define (starts-with-A str) (and (> (string-length str) 0) (string=? "A" (substring str 0 1))))
+(starts-with-A "No, I don't start with A")
+(starts-with-A "AAAAAAAAA")
+(starts-with-A "")
+
+(define (insert-syphon str i) (string-append (substring str 0 i) "-" (substring str (+ i 1))))
+(insert-syphon "Hola" 0)
