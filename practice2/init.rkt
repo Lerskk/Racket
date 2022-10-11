@@ -177,3 +177,31 @@
 (average-shortlist 0 1 9)
 (average-shortlist 7 5 9)
 (average-shortlist 5 9 7)
+
+;; data design
+;; the amount of liters left and the type of fuel are represented by number, the output is reperesnetd 
+;; by a string indicating the amount of km left in city and in the highway
+;; signature and function purpose
+;; autonomy: number number -> string
+;; the function takes two numbers and based on how many liters you have left and what type of fuel you have it will predict the amount of km you can do
+;; either in the city or in the highway
+;; examples
+
+(define AUTONOMY-CITY 8)
+(define AUTONOMY-HIGHWAY 11)
+
+(define (km-in-city liters-left type-of-fuel)
+	(cond
+		[(= type-of-fuel 2) (* liters-left AUTONOMY-CITY)]
+		[(= type-of-fuel 3) (* liters-left 1.1 AUTONOMY-CITY)]))
+
+(define (km-in-highway liters-left type-of-fuel)
+	(cond
+		[(= type-of-fuel 2) (* liters-left AUTONOMY-HIGHWAY)]
+		[(= type-of-fuel 3) (* liters-left 1.1 AUTONOMY-HIGHWAY)]))
+
+(define (autonomy liters-left type-of-fuel)
+	(string-append "Autonomy in the city: " (number->string (km-in-city liters-left type-of-fuel)) ". Autonomy in the highway: " (number->string (km-in-highway liters-left type-of-fuel))))
+
+(autonomy 20 2)
+(autonomy 20 3)
