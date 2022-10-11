@@ -129,3 +129,32 @@
 (amount-person 3 1)
 (amount-person 3 2)
 (amount-person 3 3)
+
+;; data design
+;; the age and the amount of hemogoblin are represented by numbers and return a boolean 
+;; signature and function purpose
+;; anemia?: number number -> boolean
+;; will take two numbers and base on the age and hemogoblin will define if you have or have not anemia
+;; examples
+
+(define (anemia? age hemogoblin)
+	(cond 
+		[(<= age 1) (< hemogoblin 13)]
+		[(<= age 6) (< hemogoblin 10)]
+		[(<= age 12) (< hemogoblin 11)]
+		[(<= age 60) (< hemogoblin 11.5)]
+		[(<= age 120) (< hemogoblin 12.6)]
+		[else (< hemogoblin 13)]))
+
+(anemia? 1 13)
+(anemia? 1 10)
+(anemia? 3 10)
+(anemia? 5 9.9)
+(anemia? 6.1 13)
+(anemia? 10 10)
+(anemia? 54 12)
+(anemia? 13 11.3)
+(anemia? 115 13)
+(anemia? 120 12.5)
+(anemia? 121 13)
+(anemia? 1150 10)
