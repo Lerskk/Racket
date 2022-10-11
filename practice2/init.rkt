@@ -1,4 +1,5 @@
 #lang racket/base
+(require test-engine/racket-tests)
 
 ;; Coordinates are reperesented by 2 numbers and the distance is represented by another number
 ;; distance-to-origin: number number -> number
@@ -9,7 +10,6 @@
 ;; input: 4 5 output: 6.4
 (define (distance-to-origin x y)
 	(sqrt (+ (expt x 2) (expt y 2))))
-(distance-to-origin 3 4)
 (distance-to-origin -3 -4)
 (distance-to-origin 4 5)
 
@@ -82,11 +82,50 @@
 ;; the function will take the string and return a string without the last character
 ;; without-the-last-character: stirng -> string
 ;; examples
-;; input: "hello" output: "hell"
-;; input: "bye" output: "by"
-;; input: "for" output: "fo"
+(check-expect (without-the-last-character "hello") "hell")
+(check-expect (without-the-last-character "bye") "by")
+(check-expect (without-the-last-character "for") "by")
 (define (without-the-last-character str)
 	(substring str 0 (- (string-length str) 1)))
-(without-the-last-character "hello")
-(without-the-last-character "bye")
-(without-the-last-character "for")
+
+;; there are 3 variables to represent, people, how many months they pay and the amount of money that they need to pay. This three are represented by numbers
+;; amount-person: number number -> number
+;; this will check in which category the combination of people and months fall
+;; examples
+;;; (check-expect (amount-person 1 1) )
+;;; (check-expect (amount-person 1 4) )
+;;; (check-expect (amount-person 2 3) )
+;;; (check-expect (amount-person 3 1) )
+
+(define MONTHLY-PAYMENT 650)
+(define MAX-DISCOUNT 35)
+(define TWO-PEOPLE-DISCOUNT 10)
+(define THREE-PEOPLE-DISCOUNT 20)
+(define TWO-MONTHS-DISCOUNT 15)
+(define THREE-MONTHS-DISCOUNT 25)
+(define (math discount) (/ (- 100 (+ THREE-MONTHS-DISCOUNT discount)) 100))
+
+(define (evaluate-months months discount)
+	(cond 
+		[(= months 1) (* MONTHLY-PAYMENT (/ (- 100 discount) 100))] 
+		[(= months 2) (* 2 MONTHLY-PAYMENT (/ (- 100 (+ TWO-MONTHS-DISCOUNT discount)) 100))]
+		[else (* months MONTHLY-PAYMENT 
+				(if (> (math discount) (math MAX-DISCOUNT))
+					(/ (- 100 MAX-DISCOUNT) 100)
+					(math discount)))]))
+
+(define (amount-person people months)
+	(cond 
+		[(= people 1) (evaluate-months months 0)]
+		[(= people 2) (* 2 (evaluate-months months TWO-PEOPLE-DISCOUNT))]
+		[else (* 3 (evaluate-months months THREE-PEOPLE-DISCOUNT))]))
+
+(amount-person 1 1)
+(amount-person 1 2)
+(amount-person 1 3)
+(amount-person 2 1)
+(amount-person 2 2)
+(amount-person 2 3)
+(amount-person 3 1)
+(amount-person 3 2)
+(amount-person 3 3)
