@@ -158,3 +158,22 @@
 (anemia? 120 12.5)
 (anemia? 121 13)
 (anemia? 1150 10)
+
+;; data design
+;; each number is represented by the data type number and the output is represented by a number
+;; signature and function purpose
+;; average-shortlist: number number number -> number
+;; it takes three numbers and averaged pairs to see if their are equal to the third not included in that pair
+;; examples
+
+(define (average a b) 
+	(/ (+ a b) 2))
+(define (average-shortlist a b c)
+	(cond
+		[(= a (average b c)) (* a b c)]
+		[(= b (average a c)) (* a b c)]
+		[(= c (average a b)) (* a b c)]
+		[else (+ a b c)]))
+(average-shortlist 0 1 9)
+(average-shortlist 7 5 9)
+(average-shortlist 5 9 7)
