@@ -26,21 +26,37 @@
 ;;; 	[stop-when end?])
 
 
-(define INITIAL-SIZE 100)
-(define CANVAS-SIZE 200)
+(define INITIAL-SIZE 50)
+(define CANVAS-SIZE 300)
+(define (center size)
+	(/ CANVAS-SIZE 2))
 
 (define (stop? state)
-	(= state 0))
+	(or (<= state 10) (>= state 110)))
 
 ;; state -> image
+(define (circle-color color size)
+	(place-image (circle size "solid" color) (center CANVAS-SIZE) (center CANVAS-SIZE) (empty-scene CANVAS-SIZE CANVAS-SIZE)))
+
 (define (make-circle size)
-	(place-image (circle size "solid" "red") 100 100 (empty-scene CANVAS-SIZE CANVAS-SIZE)))
+	(cond	
+		[(<= size 50) (circle-color "yellow" size)]
+		[(<= size 100) (circle-color "red" size)]
+		[(> size 100) (circle-color "green" size)]))
 
 ;; state -> state
 (define (re-size size)
-	(- size 0.1))
+	(if (< (+ size 1) (/ CANVAS-SIZE 2)) 
+		(+ size 1)
+		0))
+
+(define (change-size key-state new-size)
+	(cond
+		[(number? (string->number new-size)) (* (string->number new-size) 10)]
+		[else key-state]))
 
 (big-bang INITIAL-SIZE
 	[to-draw make-circle]
-	[on-tick re-size 0.005]
+	[on-tick re-size 0.05]
+	[on-key change-size]
 	[stop-when stop?])
