@@ -81,7 +81,26 @@
 		[(and (string=? mouse-event "drag") (<= (+ y DELTA) (- CANVAS-HIGHT 20))) y]
 		[else state]))
 
-(big-bang (/ CANVAS-HIGHT 2)
-	[to-draw move-circle]
-	[on-key move]
-	[on-mouse mouse-handler])
+;;; (big-bang (/ CANVAS-HIGHT 2)
+;;; 	[to-draw move-circle]
+;;; 	[on-key move]
+;;; 	[on-mouse mouse-handler])
+
+(define HIGHT 300)
+(define WIDTH 200)
+(define CIRCLE-RADIOUS 30)
+(define CANVAS-COLOR "white")
+
+(define (draw-in-rectangle color)
+	(place-image (circle CIRCLE-RADIOUS "solid" color) (/ WIDTH 2) (/ HIGHT 2) (rectangle WIDTH HIGHT "solid" CANVAS-COLOR)))
+
+(define (clock-controller state)
+	(cond 
+		[(string=? state "yellow") "red"]
+		[(string=? state "red") "green"]
+		[(string=? state "green") "blue"]
+		[(string=? state "blue") "yellow"]))
+
+(big-bang "yellow"
+	[to-draw draw-in-rectangle]
+	[on-tick clock-controller 0.5])
