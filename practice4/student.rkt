@@ -1,7 +1,5 @@
 #lang racket/base
-
 (require 2htdp/image)
-(require 2htdp/universe)
 
 (define-struct Student [name classification attendance])
 
