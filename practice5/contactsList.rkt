@@ -28,6 +28,14 @@
 (check-expect (have-Marcos? (cons "Juan" '())) #false)
 (check-expect (have-Marcos? (cons "Marcos" '())) #true)
 (check-expect (have-Marcos? (list 2 "Marcos" "what")) "Invalid data type")
+(check-expect (have-Marcos? (cons "Eugenia"
+  (cons "Lucía"
+    (cons "Dante"
+      (cons "Federico"
+        (cons "Marcos"
+          (cons "Gabina"
+            (cons "Sara"
+              (cons "Pamela" '()))))))))) #t)
 
 (define (have-Marcos? list) 
 	(cond
