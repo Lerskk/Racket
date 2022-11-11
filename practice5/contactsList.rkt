@@ -45,3 +45,6 @@
 		[else (have-Marcos? (rest list))]))
 
 (test)
+
+(have-Marcos? (cons "Marcos" (cons "C" '())))
+(have-Marcos? (cons "A" (cons "Marcos" (cons "C" '()))))
