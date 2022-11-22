@@ -5,14 +5,16 @@
 ;; '()
 ;; (cons Number list-of-numbers)
 
-(check-expect (make-positives (list -1 -2 0 1 2)) (list 1 2))
-(check-expect (make-positives empty) empty)
-(check-expect (make-positives (list -1 -2)) empty)
+;; data representation
+;; use the numbers as Numbers	
 
-(define (make-positives list)
-	(cond 
-		[(empty? list) empty]
-		[(> (first list) 0) (cons (first list) (make-positives (rest list)))]
-		[else (make-positives (rest list))]))
+;; signature and function purpose
+;; function list-of-numbers -> list-of-positive-numbers
+;; the function will take an element, check if is positive and return true if it is. filter will add the element to a list
+
+(check-expect (filter positive? empty) empty)
+(check-expect (filter positive? (list -1 -2 0 1 2)) (list 1 2))
+(check-expect (filter positive? (list 0)) empty)
+(check-expect (filter positive? (list -1 -2)) empty)
 
 (test)
