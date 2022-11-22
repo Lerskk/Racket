@@ -5,14 +5,21 @@
 ;; '()
 ;; (cons Number list-of-numbers)
 
-(check-expect (make-even empty) empty)
-(check-expect (make-even (list 1 2 3 4 5 6 7 8 9)) (list 2 4 6 8))
-(check-expect (make-even (list 1 3 5)) empty)
+;; a list-of-even-numbers is:
+;; '()
+;; (cons even-number list-of-even-numbers)
 
-(define (make-even list)
-	(cond
-		[(empty? list) empty]
-		[(even? (first list)) (cons (first list) (make-even (rest list)))]
-		[else (make-even (rest list))]))
+;; data representation
+;; we use numbers to define the even numbers
+
+;; signature and function purpose 
+;; pred list-of-numbers -> list-of-even-numbers
+;; you give a function that returns a boolean and it will evaluate the list until it has check every element and return a new list with the results true
+
+;; examples
+(check-expect (filter even? empty) empty)
+(check-expect (filter even? (list 1 2 3 4)) (list 2 4))
+(check-expect (filter even? (list 1 3 )) empty)
 
 (test)
+
